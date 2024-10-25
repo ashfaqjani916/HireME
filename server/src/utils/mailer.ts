@@ -6,7 +6,7 @@ interface MailingDetails {
   emailBody: string;
 }
 
-export  const sendReferralEmail = async({  emailID , emailBody }:MailingDetails)=>{
+export  const sendEmail = async({  emailID , emailBody }:MailingDetails)=>{
 
   const transporter = nodemailer.createTransport({
     service: 'gmail',

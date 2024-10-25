@@ -19,6 +19,8 @@
     "firebase-admin": "^12.7.0",
     "mongodb": "^6.10.0",
     "mongoose": "^8.7.2",
+    "node-cron": "^3.0.3",
+    "node-schedule": "^2.1.1",
     "nodemailer": "^6.9.15",
     "tsx": "^4.19.1",
     "uuid": "^10.0.0"
