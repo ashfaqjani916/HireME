@@ -1,4 +1,4 @@
-HireME
+wwwwwwHireME
 
 A web application that helps users manage internship opportunities by sending reminder emails before deadlines. Users can create groups with friends to share internships, and the platform ensures duplicate opportunities are filtered out to prevent multiple reminder emails for the same internship.
 
@@ -14,7 +14,7 @@ Table of Contents
 - [API Endpoints](#api-endpoints)
 - [Contributing](#contributing)
 - [License](#license)
-- [Contact](#contact)
+
 
 Description
 
