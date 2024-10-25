@@ -41,10 +41,10 @@ Demo
 
 - **Backend**: Node.js, Express.js
 - **Database**: MongoDB, Mongoose
-- **Authentication**: Firebase Auth
+- **Authentication**: Next Auth
 - **Email Service**: Nodemailer
-- **Frontend**: *[Specify if applicable, e.g., React, Angular]*
-- **Others**: dotenv, cors
+- **Frontend**: *[nextJS]*
+  
 
 Prerequisites
 
@@ -224,11 +224,6 @@ Please make sure your code adheres to the project's coding standards.
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## Contact
-
-- **Email**: [your-email@example.com](mailto:your-email@example.com)
-- **GitHub**: [your-username](https://github.com/your-username)
-- **LinkedIn**: [Your Name](https://www.linkedin.com/in/your-linkedin-profile)
 
 ---
 
