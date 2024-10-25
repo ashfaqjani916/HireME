@@ -1,5 +1,5 @@
 import 'dotenv/config'
-import express from 'express';
+import express, {Request, Response} from 'express';
 import cors from 'cors';  
 import { connectdb } from './db/db';
 import { v4 as uuidv4 } from 'uuid';
@@ -9,6 +9,10 @@ import {Group} from './models/Group';
 import { JobPosting } from './models/JobPosting';
 import axios from 'axios';
 import {generateCode} from './utils/generateCode'
+import { sendEmail } from './utils/mailer';
+import { Types } from 'mongoose';
+var cron = require('node-cron');
+const schedule = require('node-schedule');
 
 const app = express();
 app.use(cors());
@@ -22,6 +26,16 @@ connectdb();
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
+
+
+
+cron.schedule('* * * * * *', () => {
+  console.log('running a task every minute');
+  sendEmail({emailID:"  ", emailBody:" "});
+},{
+  timezone: "Asia/Kolkata"
+});
+
 
 
 app.get('/', (req, res) => {
@@ -123,6 +137,37 @@ app.get('/listJobPostings/:groupId', async (req, res) => {
   }
 });
 
+app.post('/addJobPosting', async (req: Request, res: Response) => {
+  console.log("/addJobPosting route is called");
+
+  const { userId, companyName, appliedDate, deadline, compensation, registrationLink, groupId } = req.body;
+
+  try {
+    // Validate required fields
+    if (!userId || !companyName || !deadline || !registrationLink || !groupId) {
+      return res.status(400).json({ error: "Missing required fields" });
+    }
+
+    // Create a new job posting document
+    const newJobPosting = new JobPosting({
+      companyName,
+      appliedDate,
+      deadline,
+      compensation,
+      registrationLink,
+      group: groupId,
+      createdBy: userId,  // Mark the user who added the job as the creator
+      appliedStatus: [],  // Initialize appliedStatus as an empty array
+    });
+
+    // Save the new job posting to the database
+    await newJobPosting.save();
+    res.status(200).json(newJobPosting);
+  } catch (error) {
+    console.error("Error adding job posting:", error);
+    res.status(500).json({ error: "Could not add job posting" });
+  }
+});
 
 //update job posting 
 // app.put('/updateJobPosting/:jobId', async (req, res) => {
