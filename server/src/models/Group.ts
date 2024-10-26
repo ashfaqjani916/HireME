@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const groupSchema = new mongoose.Schema({
-  groupID : { type: String, required: true, unique: true },
+  groupID : { type: String,  unique: true },
   name: { type: String, required: true },
   description: { type: String },
   joinCode: { type: String, required: true, unique: true },

@@ -6,4 +6,6 @@ const userSchema = new mongoose.Schema({
   groups: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Group' }],
 }, { timestamps: true });
 
-export const User = mongoose.model('User', userSchema);
+
+// Check if the model already exists, and if so, use that model; otherwise, create a new one.
+export const User = mongoose.models.User || mongoose.model('User', userSchema);

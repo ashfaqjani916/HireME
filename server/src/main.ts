@@ -29,12 +29,12 @@ app.listen(port, () => {
 
 
 
-cron.schedule('* * * * * *', () => {
-  console.log('running a task every minute');
-  sendEmail({emailID:"  ", emailBody:" "});
-},{
-  timezone: "Asia/Kolkata"
-});
+// cron.schedule('* * * * * *', () => {
+//   console.log('running a task every minute');
+//   sendEmail({emailID:"  ", emailBody:" "});
+// },{
+//   timezone: "Asia/Kolkata"
+// });
 
 
 
@@ -58,10 +58,13 @@ app.post('/createUser', async (req, res) => {
 //a route to check if the user exists
 app.post('/checkUser', async (req, res) => {
   console.log("/checkUser route is called");
-  const { email} = req.body.email;
+  console.log(req.body);
+  const { email} = req.body;
 
   try {
-    const user = await User.findOne({}).where('email').equals(email);
+    console.log(email);
+    const user = await User.findOne({ email });
+
     if (user) {
       res.send(user);
     } else {
@@ -75,18 +78,38 @@ app.post('/checkUser', async (req, res) => {
 
 });
 
+// a route to fetch all the groups
+app.get('/get-user-groups/:email', async (req: Request, res: Response) => {
+  const { email } = req.params;
+
+  try {
+    // Find the user by email
+    const user = await User.findOne({ email: email as string });
+
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    // Find all groups where the user is a member
+    const groups = await Group.find({ members: user._id });
+
+    res.json({ groups });
+  } catch (error) {
+    console.error('Error fetching user groups:', error);
+    res.status(500).json({ error: 'An error occurred while fetching groups' });
+  }
+});
 
 
 //create group route
 app.post('/createGroup', async (req, res) => {
   console.log("/createGroup route is called");
   
-  const { userId, name, description } = req.body;
+  const { userId, name } = req.body;
 
   try {
     const newGroup = new Group({
       name,
-      description,
       joinCode: generateCode(), // Generate a unique join code
       createdBy: userId,
       members: [userId],  // Add creator to the members list
@@ -100,28 +123,41 @@ app.post('/createGroup', async (req, res) => {
   }
 });
 
-
-// Route to join a team by code
+//route to join the team 
 app.post('/join-team', async (req, res) => {
-  const { username, code } = req.body;
+  const { email, code } = req.body;
 
   try {
-      // Check if the code exists in the Code collection
-      const team = await Group.findOne({}).where('joinCode').equals(code);
+    // Check if the team with the given code exists
+    const team = await Group.findOne({ joinCode: code });
 
-      if (!team) {
-          return res.status(404).json({ error: 'Invalid code. Team not found.' });
-      }
+    if (!team) {
+      return res.status(404).json({ error: 'Invalid code. Team not found.' });
+    }
 
-      // Create a new user and associate them with the team code
-      const newUser = new User({ username: username, teamCode: code });
-      await newUser.save();
+    // Find the existing user by email
+    const user = await User.findOne({ email });
 
-      res.json({ message: `User ${username} joined team: ${team.name}`, teamCode: code });
+    if (!user) {
+      return res.status(404).json({ error: 'User not found. Please register first.' });
+    }
+
+    // Check if user is already part of the team
+    if (team.members.includes(user._id)) {
+      return res.status(400).json({ error: 'User is already a member of this team.' });
+    }
+
+    // Add user to the team's members array
+    team.members.push(user._id);
+    await team.save();
+
+    res.json({ message: `User ${user.username} joined team: ${team.name}`, teamCode: code });
   } catch (error) {
-      res.status(500).json({ error: 'An error occurred while joining the team.' });
+    console.error('Error joining team:', error);
+    res.status(500).json({ error: 'An error occurred while joining the team.' });
   }
 });
+
 
 //list job posting
 app.get('/listJobPostings/:groupId', async (req, res) => {
@@ -137,10 +173,11 @@ app.get('/listJobPostings/:groupId', async (req, res) => {
   }
 });
 
+//add a new job
 app.post('/addJobPosting', async (req: Request, res: Response) => {
   console.log("/addJobPosting route is called");
 
-  const { userId, companyName, appliedDate, deadline, compensation, registrationLink, groupId } = req.body;
+  const { userId, companyName, deadline, compensation, registrationLink, groupId } = req.body;
 
   try {
     // Validate required fields
@@ -151,7 +188,6 @@ app.post('/addJobPosting', async (req: Request, res: Response) => {
     // Create a new job posting document
     const newJobPosting = new JobPosting({
       companyName,
-      appliedDate,
       deadline,
       compensation,
       registrationLink,
@@ -169,31 +205,7 @@ app.post('/addJobPosting', async (req: Request, res: Response) => {
   }
 });
 
-//update job posting 
-// app.put('/updateJobPosting/:jobId', async (req, res) => {
-//   console.log("/updateJobPosting route is called");
-//   const { jobId } = req.params;
-//   const { userId, ...updateData } = req.body;
 
-//   try {
-//     const jobPosting = await JobPosting.findById(jobId);
-
-//     // Check if the jobpositg exists
-//     if (!jobPosting) {
-//       return res.status(404).json({ error: "Job posting not found" });
-//     }
-
-//     if (jobPosting.createdBy.toString() !== userId) {
-//       return res.status(403).json({ error: "Unauthorized to update this job posting" });
-//     }
-
-//     const updatedJobPosting = await JobPosting.findByIdAndUpdate(jobId, updateData, { new: true });
-//     res.status(200).json(updatedJobPosting);
-//   } catch (error) {
-//     console.error("Error updating job posting:", error);
-//     res.status(500).json({ error: "Could not update job posting" });
-//   }
-// });
 
 
 // //delete job posting 
