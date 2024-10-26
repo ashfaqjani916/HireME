@@ -14,11 +14,13 @@ const handler = NextAuth({
 
       async signIn({ user, account, profile }) {
       // Interact with your backend API
-        
+        console.log("function before login api")
       const data = await findUser(user);
         console.log(data);
+        localStorage.setItem('UserData', JSON.stringify(data));
       // Example: allow login only if backend verification is successful
       if (data) {
+       
         return true;
       } else {
         return false;
