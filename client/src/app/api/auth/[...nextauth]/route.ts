@@ -12,21 +12,21 @@ const handler = NextAuth({
 
   callbacks: {
 
-      async signIn({ user, account, profile }) {
-      // Interact with your backend API
-        console.log("function before login api")
-      const data = await findUser(user);
-        console.log(data);
-        localStorage.setItem('UserData', JSON.stringify(data));
-      // Example: allow login only if backend verification is successful
-      if (data) {
+    //   async signIn({ user, account, profile }) {
+    //   // Interact with your backend API
+    //     console.log("function before login api")
+    //   const data = await findUser(user);
+    //     console.log(data);
+    //     localStorage.setItem('UserData', JSON.stringify(data));
+    //   // Example: allow login only if backend verification is successful
+    //   if (data) {
        
-        return true;
-      } else {
-        return false;
-      }
+    //     return true;
+    //   } else {
+    //     return false;
+    //   }
 
-    },
+    // },
     // async redirect({ url, baseUrl }) {
     //   // Optionally handle redirect after sign-in
     //   return url.startsWith(baseUrl) ? url : baseUrl;

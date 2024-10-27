@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 import DialogD from './Addgroup'
 import axios from 'axios'
+import { useUser } from '@/context/userContext'
+import { useRouter } from 'next/navigation'
 
 interface Group {
   _id: string
@@ -16,15 +18,20 @@ interface Group {
 }
 
 export default function Sidebar() {
-  const storedUserData = localStorage.getItem('UserData')
-  const user = storedUserData ? JSON.parse(storedUserData) : null
-  const [groups, setGroups] = useState<Group[]>([])
+  let [groups, setGroups] = useState<Group[]>([])
+
+  const router = useRouter()
+
+  const { user } = useUser()
 
   useEffect(() => {
     if (user) {
       const fetchData = async () => {
         try {
-          const response = await axios.get(`${process.env.BACKEND_URL}/${user.email}`)
+          const response = await axios.get(`https://2b13-49-205-107-52.ngrok-free.app/get-user-groups/nikhilpulluri7810@gmail.com`)
+          router.push('/Home')
+          console.log('we are getting a response')
+          console.log(response)
           setGroups(response.data.groups || [])
         } catch (error) {
           console.error('Error fetching groups:', error)
@@ -33,30 +40,32 @@ export default function Sidebar() {
 
       fetchData()
     }
-  }, [user])
+  }, [router])
 
-  const addGroup = async () => {
-    if (!user) return // Ensure user exists
+  const handle_add = (groupdata: Group) => {
+    setGroups([...groups, groupdata])
+  }
 
-    const newGroup = {
-      _id: `newGroupId${groups.length + 1}`,
-      name: `Group ${groups.length + 1}`,
-      joinCode: `code${groups.length + 1}`,
-      createdBy: user.userId, // Assuming you have userId in UserData
-      members: [],
-      jobPostings: [],
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString(),
-      __v: 1,
-    }
-
+  const addGroup = () => {
+    // if (!user) return // Ensure user exists
+    // const newGroup = {
+    //   _id: `newGroupId${groups.length + 1}`,
+    //   name: `Group ${groups.length + 1}`,
+    //   // joinCode: `code${groups.length + 1}`,
+    //   // createdBy: user.userId, // Assuming you have userId in UserData
+    //   // members: [],
+    //   // jobPostings: [],
+    //   // createdAt: new Date().toISOString(),
+    //   // updatedAt: new Date().toISOString(),
+    //   // __v: 1,
+    // }
     // Add the new group to the backend (replace with your API endpoint)
-    try {
-      await axios.post(`${process.env.BACKEND_URL}/addGroup`, newGroup)
-      setGroups([...groups, newGroup]) // Update state with the new group
-    } catch (error) {
-      console.error('Error adding group:', error)
-    }
+    // try {
+    //   await axios.post(`${process.env.BACKEND_URL}/addGroup`, newGroup)
+    //   setGroups([...groups, newGroup]) // Update state with the new group
+    // } catch (error) {
+    //   console.error('Error adding group:', error)
+    // }
   }
 
   return (
@@ -76,9 +85,9 @@ export default function Sidebar() {
         </div>
       </div>
 
-      <button onClick={addGroup} className="bg-blue-500 text-white rounded-md p-2 hover:bg-blue-600">
+      {/* <button onClick={addGroup} className="bg-blue-500 text-white rounded-md p-2 hover:bg-blue-600">
         Add Group
-      </button>
+      </button> */}
 
       <DialogD />
     </div>
