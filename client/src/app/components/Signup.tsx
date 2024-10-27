@@ -5,6 +5,8 @@ import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
 import { findUser } from '@/lib/signinutil'
 import { useUser } from '@/context/userContext'
+import { Button } from '@/components/ui/button'
+import Profile from './navbar/Profile'
 
 interface User {
   name?: string | null
@@ -49,12 +51,19 @@ export default function Signup() {
     // route.push('/Home')
 
     return (
-      <div className="flex gap-4 ml-auto">
-        <p className="text-sky-600">{session.user.name}</p>
+      <div className="flex gap-4 items-center">
+        <Profile />
+        {/* <div className="text-1xl font-semibold">{session.user.name}</div> */}
 
-        <button onClick={() => signOut({ callbackUrl: '/' })} className="text-red-600">
+        {/* <p className="text-sky-600">{session.user.name}</p> */}
+
+        {/* <button onClick={() => signOut({ callbackUrl: '/' })} className="text-red-600">
           Sign Out
-        </button>
+        </button> */}
+
+        <Button variant="destructive" onClick={() => signOut()}>
+          Sign Out
+        </Button>
       </div>
     )
   }

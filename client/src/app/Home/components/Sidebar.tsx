@@ -18,7 +18,19 @@ interface Group {
 }
 
 export default function Sidebar() {
-  let [groups, setGroups] = useState<Group[]>([])
+  let [groups, setGroups] = useState<Group[]>([
+    {
+      _id: 'test',
+      name: 'test',
+      joinCode: 'test',
+      createdBy: 'test',
+      members: ['mem1', 'mem2'],
+      jobPostings: ['job1, job2'],
+      createdAt: 'time',
+      updatedAt: 'utime',
+      __v: 1,
+    },
+  ])
 
   const router = useRouter()
 
