@@ -32,27 +32,27 @@ export default function Sidebar() {
     },
   ])
 
-  const router = useRouter()
+  // const router = useRouter()
 
-  const { user } = useUser()
+  // const { user } = useUser()
 
-  useEffect(() => {
-    if (user) {
-      const fetchData = async () => {
-        try {
-          const response = await axios.get(`https://2b13-49-205-107-52.ngrok-free.app/get-user-groups/nikhilpulluri7810@gmail.com`)
-          router.push('/Home')
-          console.log('we are getting a response')
-          console.log(response)
-          setGroups(response.data.groups || [])
-        } catch (error) {
-          console.error('Error fetching groups:', error)
-        }
-      }
+  // useEffect(() => {
+  //   if (user) {
+  //     const fetchData = async () => {
+  //       try {
+  //         const response = await axios.get(`https://2b13-49-205-107-52.ngrok-free.app/get-user-groups/nikhilpulluri7810@gmail.com`)
+  //         router.push('/Home')
+  //         console.log('we are getting a response')
+  //         console.log(response)
+  //         setGroups(response.data.groups || [])
+  //       } catch (error) {
+  //         console.error('Error fetching groups:', error)
+  //       }
+  //     }
 
-      fetchData()
-    }
-  }, [router])
+  //     fetchData()
+  //   }
+  // }, [router])
 
   const handle_add = (groupdata: Group) => {
     setGroups([...groups, groupdata])

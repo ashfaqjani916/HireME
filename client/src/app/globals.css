@@ -9,6 +9,12 @@
   }
 }
 
+.strikethrough {
+  text-decoration: line-through;
+  opacity: 0.6; /* Optional: makes the text slightly faded */
+}
+
+
 body {
   font-family: Arial, Helvetica, sans-serif;
 }
