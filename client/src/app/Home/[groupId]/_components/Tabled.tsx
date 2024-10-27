@@ -60,7 +60,7 @@ const data: Job[] = [
     company: 'DevOps Ltd',
     location: 'Austin',
     deadline: '2024-11-01', // Added deadline
-    link: 'https://devopsltd.com/jobs/devops-engineer', // Added link
+    link: 'www.google.com', // Added link
   },
 ]
 
@@ -116,9 +116,19 @@ export const columns: ColumnDef<Job>[] = [
     id: 'link', // New column for job link
     header: 'Link',
     cell: ({ row }) => {
-      const jobLink: string = row.getValue('link')
+      const jobLink: string = row.original.link
+      console.log(jobLink)
       return (
-        <a href={jobLink} target="_blank" rel="noopener noreferrer" className="text-blue-500 underline">
+        <a
+          href={jobLink}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-blue-500 underline"
+          onClick={(e) => {
+            // e.preventDefault()
+            e.stopPropagation() // Prevent event from bubbling up
+          }}
+        >
           View Job
         </a>
       )
@@ -218,11 +228,7 @@ export default function JobTable() {
           <TableBody>
             {table.getRowModel().rows?.length ? (
               table.getRowModel().rows.map((row) => (
-                <TableRow
-                  key={row.id}
-                  className={row.getIsSelected() ? 'strikethrough' : ''} // Add this line
-                  data-state={row.getIsSelected() && 'selected'}
-                >
+                <TableRow key={row.id} className={row.getIsSelected() ? 'strikethrough' : ''} data-state={row.getIsSelected() && 'selected'}>
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</TableCell>
                   ))}
@@ -242,9 +248,9 @@ export default function JobTable() {
         <div className="flex-1 text-sm text-muted-foreground">
           {table.getFilteredSelectedRowModel().rows.length} of {table.getFilteredRowModel().rows.length} jobs applied.
         </div>
-        <Button variant="outline" onClick={() => setRowSelection({})}>
+        {/* <Button variant="outline" onClick={() => setRowSelection({})}>
           Clear selection
-        </Button>
+        </Button> */}
       </div>
     </div>
   )

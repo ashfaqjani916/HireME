@@ -27,19 +27,21 @@ export default function DialogD() {
       //   _id: gr_id,
       //   name: gr_name,
       // }
-    //   handle_add({
-    //     _id: gr_id,
-    //     name: gr_name,
-    //   }) // Call the function passed from Sidebar
-    //   setGr_id('')
-    //   setGr_name('')
+      //   handle_add({
+      //     _id: gr_id,
+      //     name: gr_name,
+      //   }) // Call the function passed from Sidebar
+      //   setGr_id('')
+      //   setGr_name('')
     }
   }
 
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="outline">Add Group</Button>
+        {/* <Button variant="outline">Add Group</Button> */}
+
+        <button className="px-4 py-2 border border-outline rounded-md shadow-sm bg-gray-500 text-white">Add Group</button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>

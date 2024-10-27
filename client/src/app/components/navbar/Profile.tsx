@@ -25,8 +25,9 @@ export default function Profile() {
         <HoverCardContent className="w-80">
           <div className="flex justify-around items-center px-[30px] space-x-4">
             <Avatar className="w-12 h-12">
-              <AvatarImage src={'https://github.com/shadcn.png' || `${session.user.image}?timestamp=${new Date().getTime()}`} alt="User Profile Image" />
-              <AvatarFallback>NP</AvatarFallback>
+              {/* <AvatarImage src={`${session.user.image}?timestamp=${new Date().getTime()}`} alt="User Profile Image" /> */}
+              <img src={`${session.user.image}`} />
+              {/* <AvatarFallback>NP</AvatarFallback> */}
             </Avatar>
             <div className="space-y-1">
               <h4 className="text-sm font-semibold">{session.user.name}</h4>

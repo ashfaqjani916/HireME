@@ -2,13 +2,10 @@
 import React from 'react'
 import { signIn, signOut, useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
-import { useEffect } from 'react'
-import { findUser } from '@/lib/signinutil'
 import { useUser } from '@/context/userContext'
 import { Button } from '@/components/ui/button'
 import Profile from './navbar/Profile'
 import { GoogleButton } from './navbar/Google'
-import Google from 'next-auth/providers/google'
 
 interface User {
   name?: string | null

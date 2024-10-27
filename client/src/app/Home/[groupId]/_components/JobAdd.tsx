@@ -6,6 +6,7 @@ import { useState } from 'react'
 import { DatePickerWithPresets } from './DatePicker'
 
 export interface Job {
+  id: string
   role: string
   company: string
   deadline: string
@@ -19,6 +20,7 @@ interface DialogJProps {
 
 const DialogJ: React.FC<DialogJProps> = ({ onJobAdd }) => {
   const [job, setJob] = useState<Job>({
+    id: '',
     role: '',
     company: '',
     deadline: '',
@@ -37,6 +39,7 @@ const DialogJ: React.FC<DialogJProps> = ({ onJobAdd }) => {
     }
 
     setJob({
+      id: '',
       role: '',
       company: '',
       deadline: '',
@@ -48,12 +51,13 @@ const DialogJ: React.FC<DialogJProps> = ({ onJobAdd }) => {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="outline">Add Job</Button>
+        {/* <Button variant="">Add Job</Button> */}
+        <button className="px-4 py-2 border border-outline rounded-md shadow-sm bg-blue-500 text-white">Add Job</button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
           <DialogTitle>Add Job</DialogTitle>
-          <DialogDescription>Add project details here</DialogDescription>
+          <DialogDescription>Add job details here</DialogDescription>
         </DialogHeader>
         <div className="grid gap-4 py-4">
           <div className="grid grid-cols-4 items-center gap-4">

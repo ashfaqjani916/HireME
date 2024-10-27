@@ -8,11 +8,11 @@ export default function page() {
     <div className="p-3 h-full">
       <Tabled />
 
-      <DialogJ
+      {/* <DialogJ
         onJobAdd={function (job: Job): void {
           throw new Error('Function not implemented.')
         }}
-      />
+      /> */}
     </div>
   )
 }
