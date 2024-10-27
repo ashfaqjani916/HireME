@@ -12,9 +12,9 @@ interface User {
 export default function Profile() {
   const { data: session } = useSession()
 
-  if (session && session.user) {
-    console.log(session.user.image) // Logs the image URL or undefined if it doesn’t exist
-  }
+  // if (session && session.user) {
+  //   console.log(session.user.image) // Logs the image URL or undefined if it doesn’t exist
+  // }
 
   if (session && session.user) {
     return (

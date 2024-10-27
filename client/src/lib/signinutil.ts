@@ -5,8 +5,9 @@ const BASE_URL = process.env.BACKEND_URL;
 
 export async function findUser(user:any) {
   try {
+    console.log("the find user function is beign called ")
     // console.log(BASE_URL);
-    const response = await axios.post(`https://2b13-49-205-107-52.ngrok-free.app/checkUser`, 
+    const response = await axios.post(`http://localhost:8080/checkUser`, 
       user,
     );
     // console.log(response.data)
