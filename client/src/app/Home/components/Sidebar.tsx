@@ -32,52 +32,71 @@ export default function Sidebar() {
     },
   ])
 
-  // const router = useRouter()
 
-  // const { user } = useUser()
+  let groupName = '';
+  const setGroupName = (name: string) => {
+    groupName = name;
+    console.log('Group name set to:', groupName);
+  };
 
-  // useEffect(() => {
-  //   if (user) {
-  //     const fetchData = async () => {
-  //       try {
-  //         const response = await axios.get(`https://2b13-49-205-107-52.ngrok-free.app/get-user-groups/nikhilpulluri7810@gmail.com`)
-  //         router.push('/Home')
-  //         console.log('we are getting a response')
-  //         console.log(response)
-  //         setGroups(response.data.groups || [])
-  //       } catch (error) {
-  //         console.error('Error fetching groups:', error)
-  //       }
-  //     }
+  useEffect(() => {
+    console.log('Group name from sidebar:', groupName)
+    addGroup()
+  }, [groupName])
 
-  //     fetchData()
-  //   }
-  // }, [router])
+  const router = useRouter()
+
+  const { user } = useUser()
+
+  console.log('user', user)
+
+  useEffect(() => {
+    if (user) {
+      const fetchData = async () => {
+        try {
+          console.log('we are fetching data')
+          const response = await axios.get(`http://localhost:8080/get-user-groups/nikhilpulluri7810@gmail.com`)
+          console.log('we are getting a response')
+          console.log(response)
+          setGroups(response.data.groups || [])
+        } catch (error) {
+          console.error('Error fetching groups:', error)
+        }
+      }
+
+      fetchData()
+    }
+  }, [user])
 
   const handle_add = (groupdata: Group) => {
     setGroups([...groups, groupdata])
   }
 
-  const addGroup = () => {
-    // if (!user) return // Ensure user exists
-    // const newGroup = {
-    //   _id: `newGroupId${groups.length + 1}`,
-    //   name: `Group ${groups.length + 1}`,
-    //   // joinCode: `code${groups.length + 1}`,
-    //   // createdBy: user.userId, // Assuming you have userId in UserData
-    //   // members: [],
-    //   // jobPostings: [],
-    //   // createdAt: new Date().toISOString(),
-    //   // updatedAt: new Date().toISOString(),
-    //   // __v: 1,
-    // }
+  const addGroup = async () => {
+    if (!user) return // Ensure user exists
+    const newGroup = {
+      _id: `newGroupId${groups.length + 1}`,
+      name: `Group ${groups.length + 1}`,
+      joinCode: `code${groups.length + 1}`,
+      createdBy: user.userId, // Assuming you have userId in UserData
+      members: [],
+      jobPostings: [],
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+      __v: 1,
+    }
     // Add the new group to the backend (replace with your API endpoint)
-    // try {
-    //   await axios.post(`${process.env.BACKEND_URL}/addGroup`, newGroup)
-    //   setGroups([...groups, newGroup]) // Update state with the new group
-    // } catch (error) {
-    //   console.error('Error adding group:', error)
-    // }
+    try {
+      const groupResponse = await axios.post(`http://localhost:8080/createGroup`,
+        {
+          userId: user.userId,
+          name: groupName,
+        }
+      )
+      setGroups([...groups, groupResponse.data]) // Update state with the new group
+    } catch (error) {
+      console.error('Error adding group:', error)
+    }
   }
 
   return (
@@ -101,7 +120,7 @@ export default function Sidebar() {
         Add Group
       </button> */}
 
-      <DialogD />
+      <DialogD setGroupName={setGroupName} />
     </div>
   )
 }

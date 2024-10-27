@@ -11,6 +11,7 @@ import { findUser } from '@/lib/signinutil'
 interface User {
   name?: string | null
   email?: string | null
+  userId?: string | null
 }
 
 export default function Signup() {
@@ -27,6 +28,7 @@ export default function Signup() {
       setUser({
         name: session.user.name ?? '',
         email: session.user.email ?? '',
+        userId: session.user.id ?? '',
       })
 
       console.log(user)
