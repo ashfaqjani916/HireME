@@ -3,11 +3,13 @@ import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, D
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { useState } from 'react'
+import { DatePickerWithPresets } from './DatePicker'
 
 export interface Job {
+  role: string
   company: string
   deadline: string
-  compensation: string
+  location: string
   link: string
 }
 
@@ -17,9 +19,10 @@ interface DialogJProps {
 
 const DialogJ: React.FC<DialogJProps> = ({ onJobAdd }) => {
   const [job, setJob] = useState<Job>({
+    role: '',
     company: '',
     deadline: '',
-    compensation: '',
+    location: '',
     link: '',
   })
 
@@ -34,9 +37,10 @@ const DialogJ: React.FC<DialogJProps> = ({ onJobAdd }) => {
     }
 
     setJob({
+      role: '',
       company: '',
       deadline: '',
-      compensation: '',
+      location: '',
       link: '',
     })
   }
@@ -53,6 +57,13 @@ const DialogJ: React.FC<DialogJProps> = ({ onJobAdd }) => {
         </DialogHeader>
         <div className="grid gap-4 py-4">
           <div className="grid grid-cols-4 items-center gap-4">
+            <Label htmlFor="link" className="text-right">
+              Role
+            </Label>
+            <Input id="link" value={job.role} onChange={handleChange} className="col-span-3" />
+          </div>
+
+          <div className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="company" className="text-right">
               Company
             </Label>
@@ -63,14 +74,15 @@ const DialogJ: React.FC<DialogJProps> = ({ onJobAdd }) => {
             <Label htmlFor="deadline" className="text-right">
               Deadline
             </Label>
-            <Input id="deadline" value={job.deadline} onChange={handleChange} className="col-span-3" />
+            {/* <Input id="deadline" value={job.deadline} onChange={handleChange} className="col-span-3" /> */}
+            <DatePickerWithPresets />
           </div>
 
           <div className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="compensation" className="text-right">
-              Compensation
+              Location
             </Label>
-            <Input id="compensation" value={job.compensation} onChange={handleChange} className="col-span-3" />
+            <Input id="compensation" value={job.location} onChange={handleChange} className="col-span-3" />
           </div>
 
           <div className="grid grid-cols-4 items-center gap-4">
@@ -80,6 +92,7 @@ const DialogJ: React.FC<DialogJProps> = ({ onJobAdd }) => {
             <Input id="link" value={job.link} onChange={handleChange} className="col-span-3" />
           </div>
         </div>
+
         <DialogFooter>
           <Button type="button" onClick={handleSubmit}>
             Add Job
