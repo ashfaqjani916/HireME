@@ -1,11 +1,12 @@
 'use client'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { signIn, signOut, useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import { useUser } from '@/context/userContext'
 import { Button } from '@/components/ui/button'
 import Profile from './navbar/Profile'
 import { GoogleButton } from './navbar/Google'
+import { findUser } from '@/lib/signinutil'
 
 interface User {
   name?: string | null
@@ -17,27 +18,21 @@ export default function Signup() {
   const { data: session } = useSession()
   const route = useRouter()
 
-  // useEffect(() => {
-  //   if (session?.user) {
-  //     route.push('/Home')
-  //     const fetching = findUser(session.user)
-  //   }
-  // }, [route])
 
-  // useEffect(() => {
-  //   if (session && session.user) {
-  //     console.log(session)
+  useEffect(() => {
+    if (session && session.user) {
+      console.log(session)
 
-  //     const fetching = findUser(session.user)
-  //     setUser({
-  //       name: session.user.name ?? '',
-  //       email: session.user.email ?? '',
-  //     })
+      const fetching = findUser(session.user)
+      setUser({
+        name: session.user.name ?? '',
+        email: session.user.email ?? '',
+      })
 
-  //     console.log(user)
-  //     route.push('/Home')
-  //   }
-  // }, [session, setUser, route])
+      console.log(user)
+      route.push('/Home')
+    }
+  }, [session, setUser, route])
 
   // uncomment the above
 
