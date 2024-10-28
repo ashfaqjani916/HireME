@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
-import DialogD from '@/app/home/components/Addgroup'
-// import { useGroup } from '@/context/groupContext'
+import DialogD from './Addgroup'
+import axios from 'axios'
+import { useUser } from '@/context/userContext'
+import { useRouter } from 'next/navigation'
 
 interface Group {
   name: string | null
@@ -39,8 +41,8 @@ export default function Sidebar() {
         <div className="flex flex-col gap-2 mt-8">
           {groups.length > 0 ? (
             groups.map((group) => (
-              <div key={group.joinCode} className="text-sm text-black px-3 py-1 border-b rounded-md">
-                <Link href={`/home/${group.joinCode}`}>{group.name}</Link>
+              <div key={group._id} className="text-sm text-black px-3 py-1 border-b rounded-md">
+                <Link href={`/Home/${group._id}`}>{group.name}</Link>
               </div>
             ))
           ) : (

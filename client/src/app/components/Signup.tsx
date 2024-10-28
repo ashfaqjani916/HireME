@@ -29,7 +29,7 @@ export default function Signup() {
       })
 
       console.log(user)
-      // route.push('/home') // reason for route changing!
+      route.push('/Home')
     }
   }, [session, setUser, route])
 
@@ -47,5 +47,9 @@ export default function Signup() {
     )
   }
 
-  return <Button onClick={() => signIn()}>Login</Button>
+  return (
+    <div onClick={() => signIn()}>
+      <GoogleButton />
+    </div>
+  )
 }
