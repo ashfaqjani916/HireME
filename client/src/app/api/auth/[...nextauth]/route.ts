@@ -3,10 +3,10 @@ import GoogleProvider from 'next-auth/providers/google'
 import { findUser } from "@/lib/signinutil";
 
 const handler = NextAuth({
-  providers : [
+  providers: [
     GoogleProvider({
-      clientId : process.env.GOOGLE_CLIENT_ID ??"",
-      clientSecret : process.env.GOOGLE_CLIENT_SECRET ??"",
+      clientId: process.env.GOOGLE_CLIENT_ID ?? "",
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET ?? "",
     })
   ],
 
@@ -20,7 +20,7 @@ const handler = NextAuth({
     //     localStorage.setItem('UserData', JSON.stringify(data));
     //   // Example: allow login only if backend verification is successful
     //   if (data) {
-       
+
     //     return true;
     //   } else {
     //     return false;
@@ -48,4 +48,4 @@ const handler = NextAuth({
 
 })
 
-export {handler as GET, handler as POST}
+export { handler as GET, handler as POST }

@@ -30,7 +30,7 @@ export default function Signup() {
       })
 
       console.log(user)
-      route.push('/Home')
+      route.push('/home')
     }
   }, [session, setUser, route])
 
@@ -58,8 +58,8 @@ export default function Signup() {
   }
 
   return (
-    <div onClick={() => signIn()}>
-      <GoogleButton />
-    </div>
+    <Button onClick={() => signIn()}>
+      Login
+    </Button>
   )
 }
