@@ -14,12 +14,12 @@ const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
   const { user } = useUser()
   const router = useRouter()
 
-  useEffect(() => {
-    if (!user) {
-      toast.error("Unauthorised");
-      router.push('/')
-    }
-  }, [user, router])
+  // useEffect(() => {
+  //   if (!user) {
+  //     // toast.error('Unauthorised')
+  //     router.push('/')
+  //   }
+  // }, [user, router])
 
   return <>{user ? children : null}</>
 }
