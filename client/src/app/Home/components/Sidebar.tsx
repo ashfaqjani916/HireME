@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
-import DialogD from './Addgroup'
+import DialogD from '@/app/home/components/Addgroup'
 import axios from 'axios'
 import { useUser } from '@/context/userContext'
 import { useRouter } from 'next/navigation'
@@ -107,7 +107,7 @@ export default function Sidebar() {
           {groups.length > 0 ? (
             groups.map((group) => (
               <div key={group._id} className="text-sm text-black px-3 py-1 border-b rounded-md">
-                <Link href={`/Home/${group._id}`}>{group.name}</Link>
+                <Link href={`/home/${group._id}`}>{group.name}</Link>
               </div>
             ))
           ) : (
