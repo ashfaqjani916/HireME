@@ -6,6 +6,7 @@ import { useUser } from '@/context/userContext'
 import { Button } from '@/components/ui/button'
 import Profile from './navbar/Profile'
 // import { GoogleButton } from './navbar/Google'
+// import { GoogleButton } from './navbar/Google'
 import { findUser } from '@/lib/signinutil'
 
 interface User {
@@ -29,7 +30,7 @@ export default function Signup() {
       })
 
       console.log(user)
-      route.push('/Home')
+      // route.push('/home') // reason for route changing!
     }
   }, [session, setUser, route])
 
@@ -47,9 +48,5 @@ export default function Signup() {
     )
   }
 
-  return (
-    <div onClick={() => signIn()}>
-      <GoogleButton />
-    </div>
-  )
+  return <Button onClick={() => signIn()}>Login</Button>
 }
