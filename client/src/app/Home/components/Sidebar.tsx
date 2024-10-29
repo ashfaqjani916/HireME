@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 import DialogD from '@/app/home/components/Addgroup'
-import { useGroup } from '@/context/groupContext'
+// import { useGroup } from '@/context/groupContext'
 
 interface Group {
   name: string | null
@@ -19,13 +19,12 @@ export default function Sidebar() {
       members: ['mem1', 'mem2'],
     },
   ])
+  // const { name } = useGroup()
 
-  const { name } = useGroup()
-
-  const handle_add = () => {
+  const handle_add = (groupname: string) => {
     const newGroup = {
-      name: name,
-      joinCode: name,
+      name: groupname,
+      joinCode: groupname,
       createdBy: 'test',
       members: ['mem2', 'mem3'],
     }

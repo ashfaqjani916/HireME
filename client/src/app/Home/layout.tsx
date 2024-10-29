@@ -4,7 +4,7 @@ import Sidebar from '@/app/home/components/Sidebar'
 import DialogJ from './[groupId]/_components/JobAdd'
 import ProtectedRoute from '@/context/protectedRoute'
 // import { Job } from './[groupId]/_components/Tabled'
-import { GroupProvider } from '@/context/groupContext'
+// import { GroupProvider } from '@/context/groupContext'
 
 // src/types.ts
 export type Job = {
@@ -34,9 +34,7 @@ export default function layout({
         <div className="flex items-center justify-center p-5 mt-[6px]">
           <div className="grid grid-cols-6 grid-rows-5 gap-4 w-full">
             <div className="col-span-1 row-span-5 h-[75vh] bg-muted/50 rounded-md p-2">
-              <GroupProvider>
-                <Sidebar />
-              </GroupProvider>
+              <Sidebar />
             </div>
             <div className="col-span-5 row-span-5 h-[75vh] bg-muted/50 rounded-md p-2 overflow-auto">{children}</div>
           </div>
