@@ -3,10 +3,11 @@ import { Button } from '@/components/ui/button'
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { useGroup } from '@/context/groupContext'
+// import { useGroup } from '@/context/groupContext'
 
 import { useState } from 'react'
 
+<<<<<<< HEAD
 interface Group {
   _id: string
   name: string
@@ -35,6 +36,22 @@ export default function DialogD() {
       //   setGr_id('')
       //   setGr_name('')
     }
+=======
+interface DialogDProps {
+  onAddGroup: (groupname: string) => void
+}
+
+export default function DialogD({ onAddGroup }: DialogDProps) {
+  const [groupName, setGroupName] = useState('')
+  // const { setName } = useGroup()
+
+  const handleSubmit = () => {
+    console.log('Setting name:', groupName)
+    // setName(groupName)
+    console.log('Name after setting:', groupName) // Check if setName is working
+    onAddGroup(groupName)
+    setGroupName('')
+>>>>>>> ec19614 (add groups ui correction)
   }
 
   return (
