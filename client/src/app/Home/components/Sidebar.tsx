@@ -19,17 +19,67 @@ export default function Sidebar() {
       members: ['mem1', 'mem2'],
     },
   ])
-  // const { name } = useGroup()
 
-  const handle_add = (groupname: string) => {
+
+  let groupName = '';
+  const setGroupName = (name: string) => {
+    groupName = name;
+    console.log('Group name set to:', groupName);
+  };
+
+  useEffect(() => {
+    console.log('Group name from sidebar:', groupName)
+    addGroup()
+  }, [groupName])
+
+  const router = useRouter()
+
+  const { user } = useUser()
+
+  console.log('user', user)
+
+  useEffect(() => {
+    if (user) {
+      const fetchData = async () => {
+        try {
+          console.log('we are fetching data')
+          const response = await axios.get(`http://localhost:8080/get-user-groups/nikhilpulluri7810@gmail.com`)
+          console.log('we are getting a response')
+          console.log(response)
+          setGroups(response.data.groups || [])
+        } catch (error) {
+          console.error('Error fetching groups:', error)
+        }
+      }
+
+      fetchData()
+    }
+  }, [user])
+
+  const handle_add = (groupdata: Group) => {
+    setGroups([...groups, groupdata])
+  }
+
+  const addGroup = async () => {
+    if (!user) return // Ensure user exists
     const newGroup = {
       name: groupname,
       joinCode: groupname,
       createdBy: 'test',
       members: ['mem2', 'mem3'],
     }
-    console.log(name)
-    setGroups([...groups, newGroup])
+    // Add the new group to the backend (replace with your API endpoint)
+    try {
+      const groupResponse = await axios.post(`http://localhost:8080/createGroup`,
+        {
+          userId: user.userId,
+          name: groupName,
+        }
+      )
+      setGroups([...groups, groupResponse.data]) // Update state with the new group
+    } catch (error) {
+      console.error('Error adding group:', error)
+    }
   }
 
   return (
@@ -39,8 +89,8 @@ export default function Sidebar() {
         <div className="flex flex-col gap-2 mt-8">
           {groups.length > 0 ? (
             groups.map((group) => (
-              <div key={group.joinCode} className="text-sm text-black px-3 py-1 border-b rounded-md">
-                <Link href={`/home/${group.joinCode}`}>{group.name}</Link>
+              <div key={group._id} className="text-sm text-black px-3 py-1 border-b rounded-md">
+                <Link href={`/Home/${group._id}`}>{group.name}</Link>
               </div>
             ))
           ) : (
@@ -49,7 +99,11 @@ export default function Sidebar() {
         </div>
       </div>
 
-      <DialogD onAddGroup={handle_add} />
+      {/* <button onClick={addGroup} className="bg-blue-500 text-white rounded-md p-2 hover:bg-blue-600">
+        Add Group
+      </button> */}
+
+      <DialogD setGroupName={setGroupName} />
     </div>
   )
 }
