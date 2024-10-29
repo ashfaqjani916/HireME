@@ -3,19 +3,18 @@ import { Button } from '@/components/ui/button'
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { useGroup } from '@/context/groupContext'
-
+// import { useGroup } from '@/context/groupContext'
 
 
 import { useState } from 'react'
 
-// interface DialogDProps {
-//   onAddGroup: (group: Group) => void
-// }
+interface DialogDProps {
+  onAddGroup: (group: Group) => void
+}
 
 // { onAddGroup }: DialogDProps
 
-export default function DialogD() {
+export default function DialogD({ onAddGroup }: DialogDProps) {
   const [gr_id, setGr_id] = useState('')
   const [gr_name, setGr_name] = useState('')
 
