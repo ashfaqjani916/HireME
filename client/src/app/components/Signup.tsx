@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation'
 import { useUser } from '@/context/userContext'
 import { Button } from '@/components/ui/button'
 import Profile from './navbar/Profile'
-import { GoogleButton } from './navbar/Google'
+// import { GoogleButton } from './navbar/Google'
 import { findUser } from '@/lib/signinutil'
 
 interface User {
@@ -19,12 +19,11 @@ export default function Signup() {
   const { data: session } = useSession()
   const route = useRouter()
 
-
   useEffect(() => {
     if (session && session.user) {
       console.log(session)
 
-      const fetching = findUser(session.user)
+      // const fetching = findUser(session.user)
       setUser({
         name: session.user.name ?? '',
         email: session.user.email ?? '',
@@ -32,22 +31,13 @@ export default function Signup() {
       })
 
       console.log(user)
-      route.push('/Home')
+      // route.push('/home') // reason for route changing!
     }
   }, [session, setUser, route])
 
   // uncomment the above
 
   if (session && session.user) {
-    // console.log(session)
-
-    // const fetching = findUser(session.user)
-    // setUser({
-    //   name: session.user.name ?? '',
-    //   email: session.user.email ?? '',
-    // })
-    // route.push('/Home')
-
     return (
       <div className="flex gap-4 items-center">
         <Profile />
@@ -59,9 +49,5 @@ export default function Signup() {
     )
   }
 
-  return (
-    <div onClick={() => signIn()}>
-      <GoogleButton />
-    </div>
-  )
+  return <Button onClick={() => signIn()}>Login</Button>
 }

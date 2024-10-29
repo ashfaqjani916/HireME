@@ -60,7 +60,7 @@ const data: Job[] = [
     company: 'DevOps Ltd',
     location: 'Austin',
     deadline: '2024-11-01', // Added deadline
-    link: 'www.google.com', // Added link
+    link: 'https://www.google.com', // Added link
   },
 ]
 
@@ -248,9 +248,6 @@ export default function JobTable() {
         <div className="flex-1 text-sm text-muted-foreground">
           {table.getFilteredSelectedRowModel().rows.length} of {table.getFilteredRowModel().rows.length} jobs applied.
         </div>
-        {/* <Button variant="outline" onClick={() => setRowSelection({})}>
-          Clear selection
-        </Button> */}
       </div>
     </div>
   )
