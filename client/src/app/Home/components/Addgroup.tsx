@@ -8,8 +8,13 @@ import { Label } from '@/components/ui/label'
 
 import { useState } from 'react'
 
+interface Group {
+  _id: string
+  name: string
+}
+
 interface DialogDProps {
-  onAddGroup: (group: Group) => void
+  onAddGroup: (group: string) => void
 }
 
 // { onAddGroup }: DialogDProps
@@ -61,31 +66,14 @@ export default function DialogD({ onAddGroup }: DialogDProps) {
               Name
             </Label>
             <Input value={gr_name} onChange={(e) => setGr_name((prev) => (prev = e.target.value))} id="company" defaultValue="" className="col-span-3" />
-          </div>
-        </div>
+          </div >
+        </div >
         <DialogFooter>
-          <Button onClick={handleSubmit} type="submit">
+          <Button type="submit" onClick={handleSubmit}>
             Add Group
           </Button>
         </DialogFooter>
-      </DialogContent>
-    </Dialog>
+      </DialogContent >
+    </Dialog >
   )
 }
-
-// debri
-
-// const handleSubmit = () => {
-//   if (gr_id && gr_name) {
-//     // const newGroup: Group = {
-//     //   _id: gr_id,
-//     //   name: gr_name,
-//     // }
-//     //   handle_add({
-//     //     _id: gr_id,
-//     //     name: gr_name,
-//     //   }) // Call the function passed from Sidebar
-//     //   setGr_id('')
-//     //   setGr_name('')
-//   }
-// }
