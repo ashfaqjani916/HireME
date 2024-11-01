@@ -2,16 +2,16 @@ import 'dotenv/config'
 import express, {Request, Response} from 'express';
 import cors from 'cors';  
 import { connectdb } from './db/db';
-import { v4 as uuidv4 } from 'uuid';
+//import { v4 as uuidv4 } from 'uuid';
 
 import { User } from './models/User';
 import {Group} from './models/Group';
 import { JobPosting } from './models/JobPosting';
 import axios from 'axios';
 import {generateCode} from './utils/generateCode'
-import { sendEmail } from './utils/mailer';
-import { Types } from 'mongoose';
-var cron = require('node-cron');
+// import { sendEmail } from './utils/mailer';
+// import { Types } from 'mongoose';
+// var cron = require('node-cron');
 const schedule = require('node-schedule');
 
 const app = express();
@@ -251,7 +251,7 @@ app.delete('/deleteGroup/:groupId', async (req, res) => {
     return res.status(404).json({ error: "Group not found" });
   }
 
-    if (group.createdBy.toString() !== userId) {
+    if (group.createdBy?.toString() !== userId) {
       return res.status(403).json({ error: "Unauthorized to delete this group" });
     }
 

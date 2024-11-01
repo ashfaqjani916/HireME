@@ -6,6 +6,7 @@ import React, { createContext, useContext, useState, ReactNode } from 'react'
 interface User {
   name: string
   email: string
+  userId: string
   // Add other user properties here
 }
 
