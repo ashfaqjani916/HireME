@@ -117,7 +117,7 @@ export const columns: ColumnDef<Job>[] = [
     header: 'Link',
     cell: ({ row }) => {
       const jobLink: string = row.original.link
-      console.log(jobLink)
+      // console.log(jobLink)
       return (
         <a
           href={jobLink}
@@ -160,11 +160,17 @@ export const columns: ColumnDef<Job>[] = [
   },
 ]
 
-export default function JobTable() {
+type Props = {
+  groupId: string
+}
+
+export default function JobTable({ groupId }: Props) {
   const [sorting, setSorting] = React.useState<SortingState>([])
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([])
   const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({})
   const [rowSelection, setRowSelection] = React.useState({})
+
+  console.log(groupId)
 
   const table = useReactTable({
     data,

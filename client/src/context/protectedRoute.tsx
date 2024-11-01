@@ -4,7 +4,6 @@
 import React, { ReactNode, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { useUser } from './userContext'
-import toast from 'react-hot-toast'
 
 interface ProtectedRouteProps {
   children: ReactNode
