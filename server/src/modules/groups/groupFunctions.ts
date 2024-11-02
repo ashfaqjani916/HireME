@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { Group } from "../../models/Group";
 import {generateCode} from '../../utils/generateCode'
 import { User } from "../../models/User";
+const uuid = require('uuid');
 
 
 
@@ -12,6 +13,7 @@ export const createGroup = async (req: Request, res: Response) => {
 
   try {
     const newGroup = new Group({
+      groupID: uuid.v4(),
       name,
       joinCode: generateCode(), // Generate a unique join code
       createdBy: userId,
@@ -28,6 +30,7 @@ export const createGroup = async (req: Request, res: Response) => {
 
 
 export const getUserGroups = async (req: Request, res: Response) => {
+  console.log("/getUserGroups route is called");
   const { email } = req.params;
 
   try {

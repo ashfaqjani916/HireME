@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const groupSchema = new mongoose.Schema({
-  groupID : { type: String,  unique: true },
+  groupID : { type: String, required: true, unique: true },
   name: { type: String, required: true },
   description: { type: String },
   joinCode: { type: String, required: true, unique: true },
@@ -11,3 +11,6 @@ const groupSchema = new mongoose.Schema({
 }, { timestamps: true });
 
 export const Group = mongoose.model('Group', groupSchema);
+
+
+

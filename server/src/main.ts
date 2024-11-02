@@ -56,6 +56,7 @@ app.post('/createGroup',createGroup);
 //route to join the team 
 app.post('/join-team', joinGroup);
 
+
 //list job posting
 app.get('/listJobPostings/:groupId', listJobPostings);
 

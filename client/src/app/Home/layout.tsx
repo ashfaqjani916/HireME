@@ -1,8 +1,9 @@
 'use client'
 import React from 'react'
-import Sidebar from '@/app/home/components/Sidebar'
+import Sidebar from '@/app/Home/components/Sidebar'
 import DialogJ from './[groupId]/_components/JobAdd'
 import ProtectedRoute from '@/context/protectedRoute'
+import Navbar from '../components/navbar/Navbar'
 // import { Job } from './[groupId]/_components/Tabled'
 // import { GroupProvider } from '@/context/groupContext'
 
@@ -23,7 +24,9 @@ export default function layout({
 }>) {
   return (
     <ProtectedRoute>
+
       <div className="flex flex-col  justify-center">
+
         <div className="flex justify-end mr-[20px] mt-[18px]">
           <DialogJ
             onJobAdd={function (job: Job): void {

@@ -45,7 +45,6 @@ export default function Signup() {
     fetchUserData()
   }, [session, setUser, route])
 
-  // uncomment the above
 
   if (session && session.user) {
     return (
