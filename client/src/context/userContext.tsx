@@ -7,6 +7,8 @@ interface User {
   name: string
   email: string
   userId: string
+  userName: string
+  groups: Object[]
   // Add other user properties here
 }
 

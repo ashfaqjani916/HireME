@@ -9,10 +9,15 @@ import Profile from './navbar/Profile'
 import { findUser } from '@/lib/signinutil'
 
 interface User {
-  name?: string | null
-  email?: string | null
-  userId?: string | null
+  _id: string;
+  username: string;
+  email: string;
+  groups: string[];  // Assuming groups is always an empty array or an array of strings
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
 }
+
 
 export default function Signup() {
   const { user, setUser } = useUser()
@@ -20,19 +25,24 @@ export default function Signup() {
   const route = useRouter()
 
   useEffect(() => {
-    if (session && session.user) {
-      console.log(session)
+    const fetchUserData = async () => {
+      if (session && session.user) {
+        console.log(session)
 
-      // const fetching = findUser(session.user)
-      setUser({
-        name: session.user.name ?? '',
-        email: session.user.email ?? '',
-        userId: session.user.id ?? '',
-      })
+        const userData: User = await findUser(session.user)
+        setUser({
+          name: userData.username ?? '',
+          email: userData.email ?? '',
+          userId: userData._id ?? '',
+          userName: userData.username ?? '',
+          groups: userData.groups
+        })
 
-      console.log(user)
-      // route.push('/home') // reason for route changing!
+        console.log(user)
+        // route.push('/home') // reason for route changing!
+      }
     }
+    fetchUserData()
   }, [session, setUser, route])
 
   // uncomment the above
