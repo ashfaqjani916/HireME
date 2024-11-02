@@ -19,49 +19,10 @@ import { Checkbox } from '@/components/ui/checkbox'
 import { DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
 import { Input } from '@/components/ui/input'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
+import { useEffect } from 'react'
+import axios from 'axios'
 
-const data: Job[] = [
-  {
-    id: 'job1',
-    title: 'Software Engineer',
-    company: 'Tech Corp',
-    location: 'Remote',
-    deadline: '2024-12-31', // Added deadline
-    link: 'https://techcorp.com/jobs/software-engineer', // Added link
-  },
-  {
-    id: 'job2',
-    title: 'Data Scientist',
-    company: 'Data Inc',
-    location: 'New York',
-    deadline: '2024-11-15', // Added deadline
-    link: 'https://datainc.com/jobs/data-scientist', // Added link
-  },
-  {
-    id: 'job3',
-    title: 'Product Manager',
-    company: 'Product Co',
-    location: 'San Francisco',
-    deadline: '2024-10-31', // Added deadline
-    link: 'https://productco.com/jobs/product-manager', // Added link
-  },
-  {
-    id: 'job4',
-    title: 'Web Developer',
-    company: 'Web Solutions',
-    location: 'Los Angeles',
-    deadline: '2024-11-30', // Added deadline
-    link: 'https://websolutions.com/jobs/web-developer', // Added link
-  },
-  {
-    id: 'job5',
-    title: 'DevOps Engineer',
-    company: 'DevOps Ltd',
-    location: 'Austin',
-    deadline: '2024-11-01', // Added deadline
-    link: 'https://www.google.com', // Added link
-  },
-]
+let data: Job[] = [];
 
 export type Job = {
   id: string
@@ -164,6 +125,21 @@ type Props = {
 }
 
 export default function JobTable({ groupId }: Props) {
+  const [data, setData] = React.useState<Job[]>([])
+
+  const fetchData = React.useCallback(async () => {
+    try {
+      const response = await axios.get(`http://localhost:8080/listJobPostings/${groupId}`)
+      setData(response.data)
+    } catch (error) {
+      console.error('Error fetching groups:', error)
+    }
+  }, [groupId])
+
+  useEffect(() => {
+    fetchData()
+  }, [fetchData])
+
   const [sorting, setSorting] = React.useState<SortingState>([])
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([])
   const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({})

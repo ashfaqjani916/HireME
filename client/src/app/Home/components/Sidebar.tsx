@@ -42,13 +42,7 @@ export default function Sidebar() {
   }, [user])
 
   const handle_add = async (groupname: string) => {
-    // const newGroup = {
-    //   name: groupname,
-    //   joinCode: groupname,
-    //   createdBy: 'test',
-    //   members: ['mem2', 'mem3'],
-    //   _id: '2',
-    // }
+
 
     axios.post('http://localhost:8080/createGroup', {
       userId: user?.userId,
@@ -60,7 +54,6 @@ export default function Sidebar() {
       console.error('Error creating group:', error)
     })
 
-    // setGroups([...groups, newGroup])
   }
 
   const handle_join = (groupCode: string) => {
