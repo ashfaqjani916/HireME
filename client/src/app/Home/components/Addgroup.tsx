@@ -7,11 +7,6 @@ import { Label } from '@/components/ui/label'
 
 import { useState } from 'react'
 
-interface Group {
-  _id: string
-  name: string
-}
-
 interface DialogDProps {
   onAddGroup: (groupname: string) => void
 }
@@ -26,14 +21,10 @@ export default function DialogD({ onAddGroup }: DialogDProps) {
     console.log('Name after setting:', groupName) // Check if setName is working
     onAddGroup(groupName)
     setGroupName('')
->>>>>>> ec19614 (add groups ui correction)
   }
-
   return (
     <Dialog>
       <DialogTrigger asChild>
-        {/* <Button variant="outline">Add Group</Button> */}
-
         <button className="px-4 py-2 border border-outline rounded-md shadow-sm bg-gray-500 text-white">Add Group</button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
@@ -45,29 +36,17 @@ export default function DialogD({ onAddGroup }: DialogDProps) {
         <div className="grid gap-4 py-4">
           <div className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="name" className="text-right">
-              Id
-            </Label>
-            <Input value={gr_id} onChange={(e) => setGr_id((prev) => (prev = e.target.value))} id="identity" defaultValue="" className="col-span-3" />
-          </div>
-        </div>
-
-        <div className="grid gap-4 py-4">
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="name" className="text-right">
               Name
             </Label>
-            <Input value={inputValue}
-              onChange={handleInputChange} id="company" defaultValue="" className="col-span-3" />
+            <Input value={groupName} onChange={(e) => setGroupName(e.target.value)} id="company" className="col-span-3" />
           </div>
         </div>
         <DialogFooter>
-          <Button type="submit" onClick={handleSubmit}>
+          <Button onClick={handleSubmit} type="submit">
             Add Group
           </Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>
-      }
-    </>
   )
 }
