@@ -9,15 +9,14 @@ import Profile from './navbar/Profile'
 import { findUser } from '@/lib/signinutil'
 
 interface User {
-  _id: string;
-  username: string;
-  email: string;
-  groups: string[];  // Assuming groups is always an empty array or an array of strings
-  createdAt: string;
-  updatedAt: string;
-  __v: number;
+  _id: string
+  username: string
+  email: string
+  groups: string[] // Assuming groups is always an empty array or an array of strings
+  createdAt: string
+  updatedAt: string
+  __v: number
 }
-
 
 export default function Signup() {
   const { user, setUser } = useUser()
@@ -35,16 +34,15 @@ export default function Signup() {
           email: userData.email ?? '',
           userId: userData._id ?? '',
           userName: userData.username ?? '',
-          groups: userData.groups
+          groups: userData.groups,
         })
 
         console.log(user)
-        // route.push('/home') // reason for route changing!
-      }
+        route.push('/home') // reason for route changing!
+      } else route.push('/')
     }
     fetchUserData()
   }, [session, setUser, route])
-
 
   if (session && session.user) {
     return (
