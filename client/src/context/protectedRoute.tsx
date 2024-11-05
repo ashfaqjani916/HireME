@@ -1,7 +1,7 @@
 // app/context/ProtectedRoute.tsx
 'use client'
 
-import React, { ReactNode, useEffect } from 'react'
+import React, { ReactNode } from 'react'
 import { useRouter } from 'next/navigation'
 import { useUser } from './userContext'
 
@@ -11,7 +11,7 @@ interface ProtectedRouteProps {
 
 const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
   const { user } = useUser()
-  const router = useRouter()
+
 
   // useEffect(() => {
   //   if (!user) {

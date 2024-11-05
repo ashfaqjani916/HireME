@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
-import DialogD from '@/app/Home/components/Addgroup'
+import DialogD from '@/app/home/components/Addgroup'
 import { useUser } from '@/context/userContext'
 import axios from 'axios'
 import JoinGroup from './joinGroup'

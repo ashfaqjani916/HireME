@@ -3,9 +3,7 @@ import React from 'react'
 import Sidebar from './components/Sidebar'
 import DialogJ from './[groupId]/_components/JobAdd'
 import ProtectedRoute from '@/context/protectedRoute'
-import Navbar from '../components/navbar/Navbar'
-// import { Job } from './[groupId]/_components/Tabled'
-// import { GroupProvider } from '@/context/groupContext'
+
 
 // src/types.ts
 export type Job = {
@@ -29,6 +27,7 @@ export default function layout({
           <DialogJ
             onJobAdd={function (job: Job): void {
               throw new Error('Function not implemented.')
+              console.log(job)
             }}
           />
         </div>

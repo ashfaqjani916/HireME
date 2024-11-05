@@ -1,6 +1,5 @@
 import NextAuth from "next-auth/next"
 import GoogleProvider from 'next-auth/providers/google'
-import { findUser } from "@/lib/signinutil";
 
 const handler = NextAuth({
   providers: [

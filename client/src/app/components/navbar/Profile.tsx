@@ -1,14 +1,9 @@
 'use client'
 import { useSession } from 'next-auth/react'
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
 import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card'
 import Image from 'next/image'
 
-interface User {
-  name?: string | null
-  email?: string | null
-}
 
 export default function Profile() {
   const { data: session } = useSession()
