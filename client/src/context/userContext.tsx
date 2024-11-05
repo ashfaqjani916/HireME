@@ -3,13 +3,22 @@
 
 import React, { createContext, useContext, useState, ReactNode } from 'react'
 
+// interface User {
+//   name: string
+//   email: string
+//   userId: string
+//   userName: string
+//   groups: Object[]
+// }
+
 interface User {
-  name: string
+  // _id: string
+  username: string
   email: string
-  userId: string
-  userName: string
-  groups: Object[]
-  // Add other user properties here
+  // groups: string[]
+  // createdAt: string
+  // updatedAt: string
+  // __v: number
 }
 
 interface UserContextType {

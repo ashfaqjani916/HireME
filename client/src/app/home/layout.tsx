@@ -3,7 +3,7 @@ import React from 'react'
 import Sidebar from './components/Sidebar'
 import DialogJ from './[groupId]/_components/JobAdd'
 import ProtectedRoute from '@/context/protectedRoute'
-
+import Navbar from '../components/navbar/Navbar'
 
 // src/types.ts
 export type Job = {
@@ -22,6 +22,7 @@ export default function layout({
 }>) {
   return (
     <ProtectedRoute>
+      <Navbar />
       <div className="flex flex-col  justify-center">
         <div className="flex justify-end mr-[20px] mt-[18px]">
           <DialogJ

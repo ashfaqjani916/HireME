@@ -1,9 +1,38 @@
 'use client'
 
 import { Button } from '@/components/ui/button'
+import { useUser } from '@/context/userContext'
 import { ArrowRight } from 'lucide-react'
+import { signIn, useSession } from 'next-auth/react'
+import { useRouter } from 'next/navigation'
+import { useEffect } from 'react'
 
 export default function Landing() {
+  const { user, setUser } = useUser()
+  const { data: session } = useSession()
+  const route = useRouter()
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      if (session && session.user) {
+        console.log(session)
+
+        // const userData: User = await findUser(session.user)
+        setUser({
+          // name: userData.username ?? '',
+          email: session.user.email ?? '',
+          // userId: userData._id ?? '',
+          username: session.user.name ?? '',
+          // groups: userData.groups,
+        })
+
+        console.log(user)
+        route.push('/home')
+      }
+    }
+    fetchUserData()
+  }, [session, setUser, route])
+
   return (
     <>
       <div className="min-h-screen bg-gradient-to-b from-background to-secondary">
@@ -15,11 +44,8 @@ export default function Landing() {
               Track applications, set reminders, and collaborate with your peers to land your dream internship. Join thousands of students maximizing their opportunities.
             </p>
             <div className="flex gap-4 justify-center pt-4">
-              <Button size="lg" className="bg-primary hover:bg-primary/90">
-                Get Started Free <ArrowRight className="ml-2 h-4 w-4" />
-              </Button>
-              <Button size="lg" variant="outline">
-                Watch Demo
+              <Button onClick={() => signIn()} size="lg" className="bg-primary hover:bg-primary/90">
+                Login Here <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
             </div>
           </div>

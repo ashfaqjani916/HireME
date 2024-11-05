@@ -1,10 +1,10 @@
 import type { Metadata } from 'next'
 import localFont from 'next/font/local'
 import './globals.css'
-import Navbar from './components/navbar/Navbar'
+// import Navbar from './components/navbar/Navbar'
 import Providers from './components/Providers'
 import { UserProvider } from '@/context/userContext'
-import { Toaster } from "react-hot-toast";
+import { Toaster } from 'react-hot-toast'
 
 const geistSans = localFont({
   src: './fonts/GeistVF.woff',
@@ -33,7 +33,7 @@ export default function RootLayout({
         <UserProvider>
           <Providers>
             <Toaster />
-            <Navbar />
+            {/* <Navbar /> */}
             {children}
           </Providers>
         </UserProvider>
