@@ -1,11 +1,9 @@
 'use client'
-import React, { useEffect } from 'react'
-import { signIn, signOut, useSession } from 'next-auth/react'
-import { useRouter } from 'next/navigation'
+import React from 'react'
+import { signOut, useSession } from 'next-auth/react'
 import { useUser } from '@/context/userContext'
 import { Button } from '@/components/ui/button'
 import Profile from './navbar/Profile'
-import { findUser } from '@/lib/signinutil'
 
 interface User {
   // _id: string
