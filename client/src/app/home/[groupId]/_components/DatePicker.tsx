@@ -10,8 +10,18 @@ import { Calendar } from '@/components/ui/calendar'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 
-export function DatePickerWithPresets() {
+type props = {
+  getDate: (deadline: Date | undefined) => void
+}
+
+export function DatePickerWithPresets({ getDate }: props) {
   const [date, setDate] = React.useState<Date>()
+
+  const handleDateSubmit = (selectedDate: Date | undefined) => {
+    setDate((prev) => selectedDate)
+    // console.log(selectedDate)
+    getDate(selectedDate)
+  }
 
   return (
     <Popover>
@@ -34,7 +44,7 @@ export function DatePickerWithPresets() {
           </SelectContent>
         </Select>
         <div className="rounded-md border">
-          <Calendar mode="single" selected={date} onSelect={setDate} />
+          <Calendar mode="single" selected={date} onSelect={handleDateSubmit} fromDate={new Date()} />
         </div>
       </PopoverContent>
     </Popover>

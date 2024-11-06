@@ -6,12 +6,12 @@ import { useState } from 'react'
 import { DatePickerWithPresets } from './DatePicker'
 
 export interface Job {
-  id: string
-  role: string
-  company: string
+  companyName: string
   deadline: string
-  location: string
-  link: string
+  compensation: string
+  registrationLink: string
+  groups: string
+  appliedStatus: boolean
 }
 
 interface DialogJProps {
@@ -20,12 +20,12 @@ interface DialogJProps {
 
 const DialogJ: React.FC<DialogJProps> = ({ onJobAdd }) => {
   const [job, setJob] = useState<Job>({
-    id: '',
-    role: '',
-    company: '',
+    companyName: '',
     deadline: '',
-    location: '',
-    link: '',
+    compensation: '',
+    registrationLink: '',
+    groups: '',
+    appliedStatus: false,
   })
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -34,24 +34,25 @@ const DialogJ: React.FC<DialogJProps> = ({ onJobAdd }) => {
   }
 
   const handleSubmit = () => {
-    if (onJobAdd) {
-      onJobAdd(job)
-    }
+    console.log(job)
 
     setJob({
-      id: '',
-      role: '',
-      company: '',
+      companyName: '',
       deadline: '',
-      location: '',
-      link: '',
+      compensation: '',
+      registrationLink: '',
+      groups: '',
+      appliedStatus: false,
     })
+  }
+
+  const handleDate = (date: Date | undefined) => {
+    console.log(date)
   }
 
   return (
     <Dialog>
       <DialogTrigger asChild>
-        {/* <Button variant="">Add Job</Button> */}
         <button className="px-4 py-2 border border-outline rounded-md shadow-sm bg-blue-500 text-white">Add Job</button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
@@ -61,39 +62,31 @@ const DialogJ: React.FC<DialogJProps> = ({ onJobAdd }) => {
         </DialogHeader>
         <div className="grid gap-4 py-4">
           <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="link" className="text-right">
-              Role
-            </Label>
-            <Input id="link" value={job.role} onChange={handleChange} className="col-span-3" />
-          </div>
-
-          <div className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="company" className="text-right">
               Company
             </Label>
-            <Input id="company" value={job.company} onChange={handleChange} className="col-span-3" />
+            <Input id="companyName" value={job.companyName} onChange={handleChange} className="col-span-3" />
           </div>
 
           <div className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="deadline" className="text-right">
               Deadline
             </Label>
-            {/* <Input id="deadline" value={job.deadline} onChange={handleChange} className="col-span-3" /> */}
-            <DatePickerWithPresets />
+            <DatePickerWithPresets getDate={handleDate} />
           </div>
 
           <div className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="compensation" className="text-right">
-              Location
+              Compensation
             </Label>
-            <Input id="compensation" value={job.location} onChange={handleChange} className="col-span-3" />
+            <Input id="compensation" value={job.compensation} onChange={handleChange} className="col-span-3" />
           </div>
 
           <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="link" className="text-right">
-              Link
+            <Label htmlFor="registrationLink" className="text-right">
+              Apply Link
             </Label>
-            <Input id="link" value={job.link} onChange={handleChange} className="col-span-3" />
+            <Input id="registrationLink" value={job.registrationLink} onChange={handleChange} className="col-span-3" />
           </div>
         </div>
 
