@@ -6,6 +6,18 @@ import { ArrowRight } from 'lucide-react'
 import { signIn, useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
+// import { findUser } from '@/lib/signinutil'
+
+// interface User {
+//   // _id: string
+//   userId: string
+//   username: string
+//   email: string
+//   // groups: string[]
+//   // createdAt: string
+//   // updatedAt: string
+//   // __v: number
+// }
 
 export default function Landing() {
   const { user, setUser } = useUser()
@@ -21,7 +33,7 @@ export default function Landing() {
         setUser({
           // name: userData.username ?? '',
           email: session.user.email ?? '',
-          // userId: userData._id ?? '',
+          userId: '12345', // for testing
           username: session.user.name ?? '',
           // groups: userData.groups,
         })

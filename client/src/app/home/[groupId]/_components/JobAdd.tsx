@@ -14,11 +14,11 @@ export interface Job {
   appliedStatus: boolean
 }
 
-interface DialogJProps {
-  onJobAdd: (job: Job) => void
-}
+// interface DialogJProps {
+//   onJobAdd: (job: Job) => void
+// }
 
-const DialogJ: React.FC<DialogJProps> = ({ onJobAdd }) => {
+const DialogJ: React.FC = () => {
   const [job, setJob] = useState<Job>({
     companyName: '',
     deadline: '',

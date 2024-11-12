@@ -1,9 +1,20 @@
 import axios from 'axios';
 
-const BASE_URL = process.env.BACKEND_URL;
+// const BASE_URL = process.env.BACKEND_URL;
+
+interface User {
+  // _id: string
+  userId : string
+  username: string
+  email: string
+  // groups: string[]
+  // createdAt: string
+  // updatedAt: string
+  // __v: number
+}
 
 
-export async function findUser(user:any) {
+export async function findUser(user: User) {
   try {
     console.log("the find user function is beign called ")
     // console.log(BASE_URL);

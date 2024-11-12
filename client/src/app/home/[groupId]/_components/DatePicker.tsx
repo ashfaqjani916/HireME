@@ -18,7 +18,7 @@ export function DatePickerWithPresets({ getDate }: props) {
   const [date, setDate] = React.useState<Date>()
 
   const handleDateSubmit = (selectedDate: Date | undefined) => {
-    setDate((prev) => selectedDate)
+    setDate(selectedDate)
     // console.log(selectedDate)
     getDate(selectedDate)
   }

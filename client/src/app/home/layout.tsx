@@ -25,12 +25,7 @@ export default function layout({
       <Navbar />
       <div className="flex flex-col  justify-center">
         <div className="flex justify-end mr-[20px] mt-[18px]">
-          <DialogJ
-            onJobAdd={function (job: Job): void {
-              throw new Error('Function not implemented.')
-              console.log(job)
-            }}
-          />
+          <DialogJ />
         </div>
         <div className="flex items-center justify-center p-5 mt-[6px]">
           <div className="grid grid-cols-6 grid-rows-5 gap-4 w-full">

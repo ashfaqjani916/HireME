@@ -13,6 +13,7 @@ import React, { createContext, useContext, useState, ReactNode } from 'react'
 
 interface User {
   // _id: string
+  userId: string
   username: string
   email: string
   // groups: string[]

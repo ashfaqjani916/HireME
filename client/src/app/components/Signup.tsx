@@ -5,18 +5,8 @@ import { useUser } from '@/context/userContext'
 import { Button } from '@/components/ui/button'
 import Profile from './navbar/Profile'
 
-interface User {
-  // _id: string
-  username: string
-  email: string
-  // groups: string[]
-  // createdAt: string
-  // updatedAt: string
-  // __v: number
-}
-
 export default function Signup() {
-  const { user, setUser } = useUser()
+  const { setUser } = useUser()
   const { data: session } = useSession()
 
   const handlesignout = async () => {

@@ -41,7 +41,7 @@ const handler = NextAuth({
       }
       return session;
     },
-    async jwt({ token, account, profile }) {
+    async jwt({ token, account }) {
       if (account) {
         token.sub = account.providerAccountId;
       }

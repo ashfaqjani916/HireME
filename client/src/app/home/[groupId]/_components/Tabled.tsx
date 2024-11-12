@@ -72,7 +72,7 @@ export default function JobTable({ groupId }: Props) {
         </TableRow>
       </TableHeader>
       <TableBody>
-        {data.map(({ groups, ...job }) => (
+        {data.map(({ ...job }) => (
           <TableRow key={job.companyName}>
             <TableCell className="font-medium">{job.companyName}</TableCell>
             <TableCell>{job.deadline}</TableCell>

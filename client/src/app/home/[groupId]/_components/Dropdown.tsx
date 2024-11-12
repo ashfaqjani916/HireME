@@ -17,8 +17,8 @@ export default function DropdownMenuR({ status, jobid, changeStatus }: props) {
 
   const handleStatusChange = (newStatus: string) => {
     if (newStatus === 'Applied') {
-      setStat((prev) => true)
-    } else setStat((prev) => false)
+      setStat(true)
+    } else setStat(false)
     changeStatus(jobid, !stat)
   }
 
