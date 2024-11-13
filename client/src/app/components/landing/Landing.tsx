@@ -33,7 +33,7 @@ export default function Landing() {
         setUser({
           // name: userData.username ?? '',
           email: session.user.email ?? '',
-          userId: '12345', // for testing
+          userId: '12345', // for testing -
           username: session.user.name ?? '',
           // groups: userData.groups,
         })
@@ -56,7 +56,7 @@ export default function Landing() {
               Track applications, set reminders, and collaborate with your peers to land your dream internship. Join thousands of students maximizing their opportunities.
             </p>
             <div className="flex gap-4 justify-center pt-4">
-              <Button onClick={() => signIn()} size="lg" className="bg-primary hover:bg-primary/90">
+              <Button onClick={() => signIn('google')} size="lg" className="bg-primary hover:bg-primary/90">
                 Login Here <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
             </div>
