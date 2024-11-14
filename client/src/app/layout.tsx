@@ -5,6 +5,7 @@ import './globals.css'
 import Providers from './components/Providers'
 import { UserProvider } from '@/context/userContext'
 import { Toaster } from 'react-hot-toast'
+import { GroupProvider } from '@/context/presentGroup'
 
 const geistSans = localFont({
   src: './fonts/GeistVF.woff',
@@ -32,9 +33,11 @@ export default function RootLayout({
       <html lang="en" className="light">
         <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
           <UserProvider>
-            <Toaster />
-            {/* <Navbar /> */}
-            {children}
+            <GroupProvider>
+              <Toaster />
+              {/* <Navbar /> */}
+              {children}
+            </GroupProvider>
           </UserProvider>
         </body>
       </html>

@@ -4,6 +4,7 @@ import DialogD from '@/app/home/components/Addgroup'
 import { useUser } from '@/context/userContext'
 import axios from 'axios'
 import JoinGroup from './joinGroup'
+import { useGroupContext } from '@/context/presentGroup'
 
 interface Group {
   name: string | null
@@ -24,6 +25,11 @@ export default function Sidebar() {
     },
   ])
   const { user } = useUser()
+  const { setGroupId } = useGroupContext()
+
+  const handlegroupname = (gid: string) => {
+    setGroupId(gid)
+  }
 
   useEffect(() => {
     if (user) {
@@ -42,33 +48,34 @@ export default function Sidebar() {
   }, [user])
 
   const handle_add = async (groupname: string) => {
-
-
-    axios.post('http://localhost:8080/createGroup', {
-      userId: user?.userId,
-      name: groupname,
-    }).then((response) => {
-      console.log(response)
-      setGroups([...groups, response.data])
-    }).catch((error) => {
-      console.error('Error creating group:', error)
-    })
-
+    axios
+      .post('http://localhost:8080/createGroup', {
+        userId: user?.userId,
+        name: groupname,
+      })
+      .then((response) => {
+        console.log(response)
+        setGroups([...groups, response.data])
+      })
+      .catch((error) => {
+        console.error('Error creating group:', error)
+      })
   }
 
   const handle_join = (groupCode: string) => {
-
-    axios.post('http://localhost:8080/join-team', {
-      email: user?.email,
-      code: groupCode,
-    }).then((response) => {
-      console.log(response)
-      setGroups([...groups, response.data])
-    }).catch((error) => {
-      console.error('Error joining group:', error)
-    })
-
-  };
+    axios
+      .post('http://localhost:8080/join-team', {
+        email: user?.email,
+        code: groupCode,
+      })
+      .then((response) => {
+        console.log(response)
+        setGroups([...groups, response.data])
+      })
+      .catch((error) => {
+        console.error('Error joining group:', error)
+      })
+  }
 
   return (
     <div className="flex flex-col justify-between gap-4 p-4 h-full">
@@ -77,7 +84,7 @@ export default function Sidebar() {
         <div className="flex flex-col gap-2 mt-8">
           {groups.length > 0 ? (
             groups.map((group) => (
-              <div key={group._id} className="text-sm text-black px-3 py-1 border-b rounded-md">
+              <div key={group._id} onClick={() => handlegroupname(group._id)} className="text-sm text-black px-3 py-1 border-b rounded-md">
                 <Link href={`/home/${group._id}`}>{group.name}</Link>
               </div>
             ))
@@ -86,7 +93,7 @@ export default function Sidebar() {
           )}
         </div>
       </div>
-      <div className='flex flex-col gap-5'>
+      <div className="flex flex-col gap-5">
         <DialogD onAddGroup={handle_add} />
         <JoinGroup onJoinGroup={handle_join} />
       </div>

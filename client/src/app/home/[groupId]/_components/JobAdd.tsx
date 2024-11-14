@@ -4,6 +4,7 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { useState } from 'react'
 import { DatePickerWithPresets } from './DatePicker'
+import { useGroupContext } from '@/context/presentGroup'
 
 export interface Job {
   companyName: string
@@ -28,6 +29,8 @@ const DialogJ: React.FC = () => {
     appliedStatus: false,
   })
 
+  const { groupId } = useGroupContext()
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { id, value } = e.target
     setJob((prevJob) => ({ ...prevJob, [id]: value }))
@@ -35,6 +38,8 @@ const DialogJ: React.FC = () => {
 
   const handleSubmit = () => {
     console.log(job)
+
+    console.log(groupId)
 
     setJob({
       companyName: '',
