@@ -23,6 +23,14 @@ export default function Sidebar() {
       members: ['mem1', 'mem2'],
       _id: '1',
     },
+
+    {
+      name: 'test1',
+      joinCode: 'joincode',
+      createdBy: 'test',
+      members: ['mem1', 'mem2'],
+      _id: '2',
+    },
   ])
   const { user } = useUser()
   const { setGroupId } = useGroupContext()
@@ -81,11 +89,17 @@ export default function Sidebar() {
     <div className="flex flex-col justify-between gap-4 p-4 h-full">
       <div>
         <div className="text-2xl font-bold mb-4">Your Groups</div>
-        <div className="flex flex-col gap-2 mt-8">
+        <div className="flex flex-col w-full gap-2 mt-8">
           {groups.length > 0 ? (
             groups.map((group) => (
-              <div key={group._id} onClick={() => handlegroupname(group._id)} className="text-sm text-black px-3 py-1 border-b rounded-md">
-                <Link href={`/home/${group._id}`}>{group.name}</Link>
+              <div
+                key={group._id}
+                onClick={() => handlegroupname(group._id)}
+                className="text-sm text-center text-black px-3 py-2 border-2 border-gradient-to-r from-purple-500 to-blue-500 rounded-md text-gray-800 shadow-lg cursor-pointer transition-all duration-300 hover:scale-102 hover:shadow-xl hover:text-blue-600"
+              >
+                <Link href={`/home/${group._id}`} className="block">
+                  {group.name}
+                </Link>
               </div>
             ))
           ) : (
