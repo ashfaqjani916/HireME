@@ -48,36 +48,38 @@ export default function Landing() {
   return (
     <>
       <div className="min-h-screen bg-gradient-to-b from-background to-secondary flex items-center justify-center">
-        {/* Uncomment the header if needed */}
-        {/* 
-  <header className="container mx-auto px-4 pt-24 pb-16 text-center">
-    <div className="animate-fade-in space-y-6">
-      <h1 className="text-5xl md:text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-blue-600">
-        Never Miss An Internship Deadline Again
-      </h1>
-      <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-        Track applications, set reminders, and collaborate with your peers to land your dream internship. 
-        Join thousands of students maximizing their opportunities.
-      </p>
-      <div className="flex gap-4 justify-center pt-4">
-        <Button onClick={() => signIn('google')} size="lg" className="bg-primary hover:bg-primary/90">
-          Login Here <ArrowRight className="ml-2 h-4 w-4" />
-        </Button>
-      </div>
-    </div>
-  </header>
-  */}
-
         <div className="min-h-screen w-full bg-gradient-to-b from-background to-secondary flex">
-          {/* Left Section */}
-          <div className="w-[60%] flex items-center justify-center bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 shadow-md"></div>
+          <div className="w-[60%] flex flex-col items-center justify-center bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 shadow-md relative p-8 rounded-r-2xl">
+            <div className="text-[80px] text-white font-extrabold drop-shadow-lg ">.hireMe</div>
 
-          {/* Right Section */}
+            <p className="text-white text-xl mt-4 max-w-[80%] text-center leading-relaxed">
+              Your gateway to endless opportunities. Post jobs, get daily reminders, and never miss an application deadline!
+            </p>
+
+            <div className="mt-6 flex gap-4">
+              <div className="bg-white/20 text-white px-4 py-2 rounded-lg shadow-md">
+                <span className="font-semibold">Post Jobs</span>
+              </div>
+              <div className="bg-white/20 text-white px-4 py-2 rounded-lg shadow-md">
+                <span className="font-semibold">Daily Reminders</span>
+              </div>
+              <div className="bg-white/20 text-white px-4 py-2 rounded-lg shadow-md">
+                <span className="font-semibold">Stay Updated</span>
+              </div>
+            </div>
+
+            <div className="absolute top-8 left-8 w-12 h-12 bg-white rounded-full shadow-lg"></div>
+            <div className="absolute bottom-8 right-8 w-16 h-16 bg-white rounded-full shadow-lg"></div>
+            {/* <div className="absolute -top-12 -right-12 w-32 h-32 bg-gradient-to-r from-yellow-300 via-pink-400 to-purple-500 rounded-full blur-lg opacity-50"></div> */}
+          </div>
+
+          {/* section divide */}
+
           <div className="w-[40%]  flex items-center justify-center p-5">
             <div className="flex flex-col w-3/4 h-full justify-center  space-y-6">
               <div className="text-3xl font-medium text-violet-600 text-left">Sign Up</div>
               <p className="text-lg text-muted-foreground">
-                "Create an account to start tracking your applications, setting reminders, and collaborating with your peers to land your dream internship."
+                Create an account to start tracking your applications, setting reminders, and collaborating with your peers to land your dream internship.
               </p>
               <div className="flex" onClick={() => signIn('google')}>
                 <button className="flex items-center bg-white dark:bg-gray-900 border border-gray-300 rounded-lg shadow-md px-6 py-2 text-sm font-medium text-gray-800 dark:text-white hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
