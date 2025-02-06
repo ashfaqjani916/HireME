@@ -8,9 +8,11 @@ export const createUser = async( req :Request, res: Response)=>{
   console.log("/createUser route is called ")
   console.log(req.body);
   const newUser = new User({
-    username: req.body.name,
+    username: req.body.username, 
     email: req.body.email,
   });
+
+  console.log(newUser);
   
   await newUser.save();
   res.send(newUser)
