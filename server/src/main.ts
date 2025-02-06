@@ -9,7 +9,7 @@ import { createGroup, deleteGroup, getUserGroups, joinGroup } from './modules/gr
 import { addJobPosting, listJobPostings } from './modules/jobs/jobFunctions';
 
 // var cron = require('node-cron');
-const schedule = require('node-schedule');
+//const schedule = require('node-schedule');
 
 const app = express();
 app.use(cors());
@@ -62,8 +62,6 @@ app.get('/listJobPostings/:groupId', listJobPostings);
 
 //add a new job
 app.post('/addJobPosting', addJobPosting);
-
-
 
 //delete a group
 app.delete('/deleteGroup/:groupId', deleteGroup);
