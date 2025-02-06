@@ -16,7 +16,7 @@ app.use(cors());
 app.use(express.json());
 
 
-const port = 8080;
+const port = 8000;
 
 //connect to the database 
 connectdb();
