@@ -5,12 +5,11 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "tsx watch api/src/main.ts"
+    "dev": "tsx watch src/main.ts"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@vercel/node": "^5.1.2",
     "axios": "^1.7.7",
     "body-parser": "^1.20.3",
     "cors": "^2.8.5",
