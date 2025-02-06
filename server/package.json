@@ -5,12 +5,12 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "tsx watch src/main.ts",
-    "build": "tsc"
+    "dev": "tsx watch api/src/main.ts",
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@vercel/node": "^5.1.2",
     "axios": "^1.7.7",
     "body-parser": "^1.20.3",
     "cors": "^2.8.5",
@@ -24,6 +24,9 @@
     "node-cron": "^3.0.3",
     "node-schedule": "^2.1.1",
     "nodemailer": "^6.9.15",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui": "^5.18.3",
+    "swagger-ui-express": "^5.0.1",
     "tsx": "^4.19.1",
     "uuid": "^10.0.0",
     "yarn": "^1.22.22"

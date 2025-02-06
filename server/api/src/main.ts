@@ -2,21 +2,40 @@ import 'dotenv/config'
 import express from 'express';
 import cors from 'cors';  
 import { connectdb } from './db/db';
-import {Group} from './models/Group';
-
 import { checkUser, createUser } from './modules/user/userFunctions';
 import { createGroup, deleteGroup, getUserGroups, joinGroup } from './modules/groups/groupFunctions';
 import { addJobPosting, listJobPostings } from './modules/jobs/jobFunctions';
-
+import { VercelRequest, VercelResponse } from "@vercel/node";
+const swaggerUi = require('swagger-ui-express');
+const  swaggerJsDoc = require("swagger-jsdoc")
 // var cron = require('node-cron');
 //const schedule = require('node-schedule');
 
 const app = express();
 app.use(cors());
 app.use(express.json());
-
-
 const port = 8080;
+
+const options = {
+  definition: {
+    openapi: "3.0.0",
+    info: {
+      title: "hireMe API",
+      version: "1.0.0",
+      description: "This the OpenAPI spec for hireME's backend service"
+    },
+    servers: [
+      {
+        url: "http://localhost:8080"
+      }
+    ],
+  },
+    apis: ["./*.ts"]
+}
+
+const specs = swaggerJsDoc(options)
+
+app.use("/api-docs", swaggerUi.serve , swaggerUi.setup(specs))
 
 //connect to the database 
 connectdb();
@@ -65,3 +84,8 @@ app.post('/addJobPosting', addJobPosting);
 
 //delete a group
 app.delete('/deleteGroup/:groupId', deleteGroup);
+
+
+export default function handler(req: VercelRequest, res: VercelResponse) {
+  return app(req as any, res as any); // Type cast to avoid Express-Vercel mismatch
+}

@@ -2,13 +2,13 @@
   "compilerOptions": {
     "target": "ES6", // Specify ECMAScript target version
     "module": "CommonJS", // CommonJS for Node.js
-    "rootDir": "./src", // Root directory of TypeScript source
+    "rootDir": "./api/src", // Root directory of TypeScript source
     "outDir": "./dist", // Output directory for compiled JS
     "strict": true, // Enable strict type-checking options
     "esModuleInterop": true, // Ensures compatibility with CommonJS
     "forceConsistentCasingInFileNames": true, // Enforce case sensitivity
     "skipLibCheck": true // Skips type checking of declaration files
   },
-  "include": ["src/**/*.ts"], // Include all TS files in src
+  "include": ["api/src/**/*.ts"], // Include all TS files in src
   "exclude": ["node_modules", "dist"] // Exclude these folders
 }
